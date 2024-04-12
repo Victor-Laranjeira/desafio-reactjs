@@ -4,14 +4,17 @@ import { faBuilding, faEnvelope, faHeart, faStar } from '@fortawesome/free-regul
 import DevInfoLinkContent from './DevInfoLinkContent';
 import { faLink, faLocationDot, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 interface DevInfoSideContentProps {
-  name?: string;
-  login?: string;
-  bio?: string;
-  followers?: string;
-  following?: string;
-  stars?: string;
+  name: string;
+  login: string;
+  bio: string;
+  followers: string;
+  following: string;
+  stars: string;
+  image_url: string;
 }
 
 // <FontAwesomeIcon icon={faHeart} />
@@ -19,30 +22,45 @@ interface DevInfoSideContentProps {
 // <FontAwesomeIcon icon={faStar} />
 
 function DevInfoSideContent({
-  name = 'Victor Laranjeira',
-  login = '@Victor-Laranjeira',
-  bio = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
-  followers = '150',
-  following = '200',
-  stars = '100',
+  name,
+  login,
+  bio,
+  followers,
+  following,
+  stars,
+  image_url,
 }: DevInfoSideContentProps) {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    console.log(image_url)
+
+  }, [image_url])
+
+  function handleClick() {
+    navigate('/')
+  }
+
   return (
     <div className={style.sideContent}>
+      <div className={style.imageContainer}>
+        <img className={style.img} src={image_url} alt='Imagem de usuário.' />
+      </div>
       <div className={style.titleContainer}>
         <h1 className={style.title}>{name}</h1>
-        <h4 className={style.subTitle}>{login}</h4>
+        <h4 className={style.subTitle}>@{login}</h4>
       </div>
       <p className={style.userBio}>{bio}</p>
-      <div className={style.stats}>
-        <div >
-          <FontAwesomeIcon icon={faHeart} />
+      <div className={style.statsContainer}>
+        <div className={style.stats}>
+          <FontAwesomeIcon icon={faPeopleGroup} />
           <p>{followers}</p>
         </div>
-        <div>
-          <FontAwesomeIcon icon={faPeopleGroup} />
+        <div className={style.stats}>
+          <FontAwesomeIcon icon={faHeart} />
           <p>{following}</p>
         </div>
-        <div>
+        <div className={style.stats}>
           <FontAwesomeIcon icon={faStar} />
           <p>{stars}</p>
         </div>
@@ -62,6 +80,12 @@ function DevInfoSideContent({
       <DevInfoLinkContent title='twitter' link=''>
         <FontAwesomeIcon icon={faTwitter} />
       </DevInfoLinkContent>
+      <button
+        className={style.backButton}
+        onClick={handleClick}
+      >
+        Voltar
+      </button>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 .main {
   display: flex;
+  height: 100vh;
   width: 100%;
-  margin: 5px;
   background-color: #469034;
   /* justify-content: center; */
   align-items: center;
@@ -17,12 +17,25 @@
 .sideContent {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: calc(100% - 50px);;
   min-width: 20%;
   max-width: 20%;
   background-color: #566173;
-  padding: 15px;
+  padding: 25px;
   align-items: center;
+}
+
+.imageContainer {
+  height: 250px;
+  width: 250px;
+  margin:20px 0px 20px 0px;
+  background-color: #735668;
+}
+
+.img {
+  height: 250px;
+  width: 250px;
+  object-fit: contain;
 }
 
 .titleContainer {
@@ -59,11 +72,21 @@
   overflow: hidden;
 }
 
-.stats {
+.statsContainer {
   display: flex;
   width: 100%;
   row-gap: 5px;
   font-size: x-small;
+  justify-content: space-between;
+}
+
+.stats {
+  display: flex;
+  color: white;
+  font-size: small;
+  column-gap: 3px;
+  justify-content: center;
+  align-items: center;
 }
 
 .link {
@@ -76,4 +99,19 @@
   justify-content: flex-start;
   align-items: center;
   text-decoration: none;
+}
+
+.backButton {
+  display: flex;
+  height: 45px;
+  width: 155px;
+  margin: 10px 0px 10px 0px;
+  border-radius: 4px;
+  border-width: 0px;
+  background-color: white;
+  font-style: italic;
+  font-size: small;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }

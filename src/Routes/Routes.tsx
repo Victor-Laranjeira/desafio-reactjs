@@ -5,7 +5,7 @@ import SearchDev from "../SearchDev";
 
 export const router = createBrowserRouter([
   {
-    path: '/sign',
+    path: '/',
     element: <SearchDev />,
   },
   {

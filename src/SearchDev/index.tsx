@@ -1,21 +1,33 @@
 import { ChangeEvent, useState } from 'react';
-import style from './SearchDev.module.css'
+import style from './SearchDev.module.css';
+import { useNavigate } from 'react-router-dom';
+
+interface GithubProps {
+  name: string;
+  login: string;
+  bio: string;
+  followers: string;
+  following: string;
+  stars: string;
+  avatar_url: string;
+}
 
 function SearchDev() {
   const [searchInput, setSearchInput] = useState<string>('')
+  const navigate = useNavigate();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     const { value } = e.target;
-    console.log(value);
     setSearchInput(value);
   }
 
   async function handleClick() {
     try {
       const response = await fetch(`https://api.github.com/users/${searchInput}`);
-      console.log(await response.json())
+      const userData: GithubProps = await response.json();
+      navigate('/devinfo', {state: userData})
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
   }
 
