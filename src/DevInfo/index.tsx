@@ -15,18 +15,19 @@ interface GithubProps {
 
 function DevInfo() {
   let { state } = useLocation();
+  console.log(state)
   return (
     <div className={style.main}>
       <DevInfoSideContent
-        name={state.name}
-        login={state.login}
-        bio={state.bio}
-        followers={state.followers}
-        following={state.following}
-        stars={state.stars}
-        image_url={state.avatar_url}
+        name={state.userData.name}
+        login={state.userData.login}
+        bio={state.userData.bio}
+        followers={state.userData.followers}
+        following={state.userData.following}
+        stars={state.userData.stars}
+        image_url={state.userData.avatar_url}
       />
-      <DevInfoBody title='Titulo' bio='nfdjskagbfjkhds bfdhsgbk hfjds bghfdjskbghfdjsk bghfdjskbgfhdsjkb hgfjdskbgfhndjskbghfdjskgfds' stars='100' updated='Updated 30 days ago' />
+      <DevInfoBody repositoryArray={state.repositoryData} />
     </div>
   )
 }

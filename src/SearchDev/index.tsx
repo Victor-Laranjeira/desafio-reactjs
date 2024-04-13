@@ -23,11 +23,17 @@ function SearchDev() {
 
   async function handleClick() {
     try {
-      const response = await fetch(`https://api.github.com/users/${searchInput}`);
-      const userData: GithubProps = await response.json();
-      const s = await fetch(`https://api.github.com/users/${userData.login}/repos`);
-      console.log(await s.json())
-      navigate('/devinfo', {state: userData})
+      const userResponse = await fetch(`https://api.github.com/users/${searchInput}`);
+      const userData: GithubProps = await userResponse.json();
+      const repositoryResponse = await fetch(`https://api.github.com/users/${userData.login}/repos`);
+      const repositoryData = await repositoryResponse.json();
+      // console.log(await repositoryData.json());
+      const githubInfo = {
+        userData: userData,
+        repositoryData: repositoryData,
+      };
+      console.log(githubInfo.userData)
+      navigate('/devinfo', {state: githubInfo});
     } catch (e) {
       console.log(e);
     }

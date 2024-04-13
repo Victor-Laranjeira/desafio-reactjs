@@ -3,15 +3,20 @@
   height: 100vh;
   width: 100%;
   background-color: #fafafa;
-  /* justify-content: center; */
-  /* align-items: center; */
 }
 
 .body {
   display: flex;
+  flex-direction: column;
+  padding: 0px 60px 0px 60px;
+  height: 100%;
   width: 100%;
-  padding: 15px;
-  overflow-y: visible;
+  row-gap: 5px;
+  overflow-y: auto;
+}
+
+.body::-webkit-scrollbar {
+  display: none;
 }
 
 .sideContent {
@@ -30,7 +35,6 @@
   height: 250px;
   width: 250px;
   margin:20px 0px 20px 0px;
-  background-color: #735668;
 }
 
 .img {
@@ -134,11 +138,12 @@
 .card {
   display: flex;
   flex-direction: column;
-  height: 15vh;
-  min-height: 5vh;
-  width: 100%;
+  min-height: 130px;
+  border-bottom: solid #3b4252;
+  border-width: 0px 0px 0.5px 0px;
   padding: 15px;
   justify-content: space-between;
+  cursor: pointer;
 }
 
 .cardTitle {
@@ -151,7 +156,7 @@
 
 .cardBio {
   display:inline-block;
-  max-height: 80%;
+  height: 80%;
   width: 100%;
   color: #3b4252;
   margin: 0;
@@ -174,4 +179,8 @@
   width: 8px;
   border-radius: 100%;
   background-color: #3b4252;
+}
+
+p {
+  margin: 0;
 }
