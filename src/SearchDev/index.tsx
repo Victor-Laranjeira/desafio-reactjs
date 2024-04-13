@@ -25,6 +25,8 @@ function SearchDev() {
     try {
       const response = await fetch(`https://api.github.com/users/${searchInput}`);
       const userData: GithubProps = await response.json();
+      const s = await fetch(`https://api.github.com/users/${userData.login}/repos`);
+      console.log(await s.json())
       navigate('/devinfo', {state: userData})
     } catch (e) {
       console.log(e);

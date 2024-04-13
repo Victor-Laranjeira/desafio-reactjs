@@ -1,11 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import style from '../DevInfo.module.css'
-import { faBuilding, faEnvelope, faHeart, faStar } from '@fortawesome/free-regular-svg-icons';
+import { faHeart, faStar } from '@fortawesome/free-regular-svg-icons';
 import DevInfoLinkContent from './DevInfoLinkContent';
-import { faLink, faLocationDot, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
-import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 
 interface DevInfoSideContentProps {
   name: string;
@@ -17,10 +15,6 @@ interface DevInfoSideContentProps {
   image_url: string;
 }
 
-// <FontAwesomeIcon icon={faHeart} />
-// <FontAwesomeIcon icon={faPeopleGroup} />
-// <FontAwesomeIcon icon={faStar} />
-
 function DevInfoSideContent({
   name,
   login,
@@ -31,11 +25,6 @@ function DevInfoSideContent({
   image_url,
 }: DevInfoSideContentProps) {
   const navigate = useNavigate()
-
-  useEffect(() => {
-    console.log(image_url)
-
-  }, [image_url])
 
   function handleClick() {
     navigate('/')
@@ -54,32 +43,24 @@ function DevInfoSideContent({
       <div className={style.statsContainer}>
         <div className={style.stats}>
           <FontAwesomeIcon icon={faPeopleGroup} />
-          <p>{followers}</p>
+          <p>{followers} followers</p>
         </div>
         <div className={style.stats}>
           <FontAwesomeIcon icon={faHeart} />
-          <p>{following}</p>
+          <p>{following} following</p>
         </div>
         <div className={style.stats}>
           <FontAwesomeIcon icon={faStar} />
-          <p>{stars}</p>
+          <p>{stars} stars</p>
         </div>
       </div>
-      <DevInfoLinkContent title='organization' link=''>
-        <FontAwesomeIcon icon={faBuilding} />
-      </DevInfoLinkContent>
-      <DevInfoLinkContent title='location' link=''>
-        <FontAwesomeIcon icon={faLocationDot} />
-      </DevInfoLinkContent>
-      <DevInfoLinkContent title='email' link=''>
-        <FontAwesomeIcon icon={faEnvelope} />
-      </DevInfoLinkContent>
-      <DevInfoLinkContent title='website' link=''>
-        <FontAwesomeIcon icon={faLink} />
-      </DevInfoLinkContent>
-      <DevInfoLinkContent title='twitter' link=''>
-        <FontAwesomeIcon icon={faTwitter} />
-      </DevInfoLinkContent>
+      <div className={style.linkContainer}>
+        <DevInfoLinkContent title='organization' link='' />
+        <DevInfoLinkContent title='location' link='' />
+        <DevInfoLinkContent title='email' link='' />
+        <DevInfoLinkContent title='website' link='' />
+        <DevInfoLinkContent title='twitter' link='' />
+      </div>
       <button
         className={style.backButton}
         onClick={handleClick}

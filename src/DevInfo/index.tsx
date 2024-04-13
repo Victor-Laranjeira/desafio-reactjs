@@ -1,7 +1,7 @@
-import react from 'react'
 import style from './DevInfo.module.css'
 import DevInfoSideContent from './Components/DevInfoSideContent';
 import { useLocation } from 'react-router-dom';
+import DevInfoBody from './Components/DevInfoBody';
 
 interface GithubProps {
   name: string;
@@ -15,7 +15,6 @@ interface GithubProps {
 
 function DevInfo() {
   let { state } = useLocation();
-  console.log(state)
   return (
     <div className={style.main}>
       <DevInfoSideContent
@@ -27,6 +26,7 @@ function DevInfo() {
         stars={state.stars}
         image_url={state.avatar_url}
       />
+      <DevInfoBody title='Titulo' bio='nfdjskagbfjkhds bfdhsgbk hfjds bghfdjskbghfdjsk bghfdjskbgfhdsjkb hgfjdskbgfhndjskbghfdjskgfds' stars='100' updated='Updated 30 days ago' />
     </div>
   )
 }
