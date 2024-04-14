@@ -13,6 +13,11 @@ interface DevInfoSideContentProps {
   following: string;
   stars: string;
   image_url: string;
+  organization: string;
+  blog: string;
+  email: string;
+  twitter: string;
+  location: string;
 }
 
 function DevInfoSideContent({
@@ -23,6 +28,11 @@ function DevInfoSideContent({
   following,
   stars,
   image_url,
+  organization,
+  blog,
+  email,
+  twitter,
+  location,
 }: DevInfoSideContentProps) {
   const navigate = useNavigate()
 
@@ -55,11 +65,11 @@ function DevInfoSideContent({
         </div>
       </div>
       <div className={style.linkContainer}>
-        <DevInfoLinkContent title='organization' link='' />
-        <DevInfoLinkContent title='location' link='' />
-        <DevInfoLinkContent title='email' link='' />
-        <DevInfoLinkContent title='website' link='' />
-        <DevInfoLinkContent title='twitter' link='' />
+        <DevInfoLinkContent type='organization' title={organization} />
+        <DevInfoLinkContent type='location' title={location} />
+        <DevInfoLinkContent type='email' title={email} link={email} />
+        <DevInfoLinkContent type='website' title={blog} link={blog} />
+        <DevInfoLinkContent type='twitter' title={`@${twitter}`} link={`https://www.twitter.com/${twitter}`} />
       </div>
       <button
         className={style.backButton}

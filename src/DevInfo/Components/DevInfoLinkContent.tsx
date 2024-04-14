@@ -5,14 +5,14 @@ import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faLocationDot, faLink } from "@fortawesome/free-solid-svg-icons";
 
 interface DevInfoLinkContentProps {
+  type: string;
   title: string;
-  link: string;
+  link?: string;
 }
 
-function DevInfoLinkContent({title, link}: DevInfoLinkContentProps) {
-
+function DevInfoLinkContent({type, title, link}: DevInfoLinkContentProps) {
   function handleIcon(): IconDefinition {
-    switch (title) {
+    switch (type) {
       case 'organization':
         return(faBuilding)
       case 'location':
@@ -28,10 +28,23 @@ function DevInfoLinkContent({title, link}: DevInfoLinkContentProps) {
     }
   }
 
+  function handleTitle(): string {
+    if (title) {
+      return title;
+    }
+    return type;
+  }
+
   return (
     <div className={style.linkElement}>
-      <FontAwesomeIcon icon={handleIcon()} />
-      <a className={style.link} href={link} target="_blank">{title}</a>
+      <FontAwesomeIcon className={style.icon} icon={handleIcon()} />
+      {
+        link ? (
+          <a className={style.link} href={link} target="_blank">{title}</a>
+        ) : (
+          <p>{handleTitle()}</p>
+        )
+      }
     </div>
   )
 }
