@@ -33,8 +33,9 @@
 }
 
 .searchButton {
+  display: flex;
   height: 40px;
-  width: 8%;
+  min-width: 8%;
   font-style: italic;
   font-size: medium;
   font-weight: 300;
@@ -43,6 +44,9 @@
   border-width: 1px;
   color: white;
   cursor: pointer;
+  column-gap: 5px;
+  justify-content: center;
+  align-items: center;
 }
 
 .link {

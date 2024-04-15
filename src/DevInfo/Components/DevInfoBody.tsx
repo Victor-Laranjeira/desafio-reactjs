@@ -15,7 +15,7 @@ interface DevInfoCardProps {
 }
 
 function DevInfoBody({ repositoryArray }: DevInfoCardProps) {
-
+  
   function handleUpdatedDate(date: Date): string {
     const currentDateTime =  new Date().getTime();
     const updatedTime = new Date(date).getTime();
@@ -27,24 +27,28 @@ function DevInfoBody({ repositoryArray }: DevInfoCardProps) {
 
   return (
     <div className={style.body}>
-      {repositoryArray.map((repository: repositoryInfoProps, i: number) => {
-        return (
-          <div key={i} className={style.card}>
-            <button className={style.titleButton}>
-              <p className={style.cardTitle}><a href={repository.svn_url} target="_blank">{repository.full_name}</a></p>
-            </button>
-            <p className={style.cardBio}>{repository.description}</p>
-            <div className={style.cardFooter}>
-              <p>
-                <FontAwesomeIcon icon={faStar} />
-                {repository.stargazers_count} stars
-              </p>
-              <span className={style.dot} />
-              <p>Updated {handleUpdatedDate(repository.updated_at)} days ago</p>
+      {repositoryArray
+        .sort((a,b) => {
+          return b.stargazers_count - a.stargazers_count
+        })
+        .map((repository: repositoryInfoProps, i: number) => {
+          return (
+            <div key={i} className={style.card}>
+              <button className={style.titleButton}>
+                <p className={style.cardTitle}><a href={repository.svn_url} target="_blank">{repository.full_name}</a></p>
+              </button>
+              <p className={style.cardBio}>{repository.description}</p>
+              <div className={style.cardFooter}>
+                <p>
+                  <FontAwesomeIcon icon={faStar} />
+                  {repository.stargazers_count} stars
+                </p>
+                <span className={style.dot} />
+                <p>Updated {handleUpdatedDate(repository.updated_at)} days ago</p>
+              </div>
             </div>
-          </div>
-        )
-      })}
+          )})
+      }
     </div>
   )
 }

@@ -1,10 +1,17 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import style from './SearchDev.module.css';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 function SearchDev() {
-  const [searchInput, setSearchInput] = useState<string>('')
+  const [searchInput, setSearchInput] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Home";
+  }, [])
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     const { value } = e.target;
@@ -17,38 +24,51 @@ function SearchDev() {
       const userData = await userResponse.json();
       const repositoryResponse = await fetch(`https://api.github.com/users/${userData.login}/repos`);
       const repositoryData = await repositoryResponse.json();
-      console.log(userData);
+      if (userData?.message) {
+        handleError();
+        return;
+      }
       const githubInfo = {
         userData: userData,
         repositoryData: repositoryData,
       };
-      navigate('/devinfo', {state: githubInfo});
+      return navigate('/perfil', {state: githubInfo});
     } catch (e) {
-      console.log(e);
+      handleError();
     }
   }
 
+  function handleError() {
+    setErrorMessage(true)
+    setTimeout(() => {
+      setErrorMessage(false);
+    }, 2000);
+  }
+
   return (
-    <>
-      <title>Home</title>
-      <div className={style.main}>
-        <p className={style.text}>Search Devs</p>
-        <div className={style.searchArea}>
-          <input 
-            className={style.searchInput}
-            placeholder='Type the username here...'
-            onChange={(e) => handleChange(e)}
-            value={searchInput}
-          />
-          <button 
-            className={style.searchButton}
-            onClick={handleClick}
-          >
-            Buscar
-          </button>
-        </div>
+    <div className={style.main}>
+      <p className={style.text}>Search Devs</p>
+      <div className={style.searchArea}>
+        <input 
+          className={style.searchInput}
+          placeholder='Type the username here...'
+          onChange={(e) => handleChange(e)}
+          value={searchInput}
+        />
+        <button 
+          className={style.searchButton}
+          onClick={handleClick}
+        >
+          <div>
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          </div>
+          Buscar
+        </button>
       </div>
-    </>
+      {
+        errorMessage && <p>Usuário não encontrado.</p>
+      }
+    </div>
   )
 }
 

@@ -37,7 +37,14 @@ function DevInfoSideContent({
   const navigate = useNavigate()
 
   function handleClick() {
-    navigate('/')
+    navigate('/home')
+  }
+
+  function teste(): boolean {
+    if (twitter) {
+      return true
+    }
+    return false
   }
 
   return (
@@ -69,7 +76,11 @@ function DevInfoSideContent({
         <DevInfoLinkContent type='location' title={location} />
         <DevInfoLinkContent type='email' title={email} link={email} />
         <DevInfoLinkContent type='website' title={blog} link={blog} />
-        <DevInfoLinkContent type='twitter' title={`@${twitter}`} link={`https://www.twitter.com/${twitter}`} />
+        {
+          teste() 
+          ? <DevInfoLinkContent type='twitter' title={`@${twitter}`}  link={`https://www.twitter.com/${twitter}`} />
+          : <DevInfoLinkContent type='twitter' title='email' /> 
+        }
       </div>
       <button
         className={style.backButton}
